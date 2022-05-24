@@ -1,0 +1,8 @@
+{
+    "owner_id":"12345678",
+    "prefix":">",
+    "token":"AAABBBCCC",
+    "max":"10",
+    "min":"5",
+    "new":"10"
+}
