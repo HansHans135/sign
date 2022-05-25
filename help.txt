@@ -1,6 +1,6 @@
 1.於config.json填入資料
     owner_id填你的id
-    prefix填你的前輟
+    prefix填你的前綴
     token就填token
     max每次簽到最高獲得數
     min每次簽到最低獲得數
