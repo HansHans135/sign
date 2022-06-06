@@ -43,6 +43,7 @@ async def on_message(message):
         embed.add_field(name=f"{PREFIX}sign", value="簽到(冷卻時間的計算為每天08:00重製)")
         embed.add_field(name=f"{PREFIX}me", value="看你有多少錢")
         embed.add_field(name=f"{PREFIX}money id", value="看別人有多少錢")
+        embed.add_field(name=f"{PREFIX}to id 錢", value="轉帳給別人")
         embed.add_field(name=f"{PREFIX}info", value="關於")
         await message.channel.send(content=None, embed=embed)
 #info
@@ -61,7 +62,7 @@ async def on_message(message):
           await message.channel.send(f"{message.author.mention}你已經建立過帳號了!")
       else:
           with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
-            data = {"last_time":"0","money":NEW,"g":"0"}
+            data = {"last_time":"0","money":NEW}
             json.dump(data,filt)
             money = data['money']
           await message.channel.send(f"{message.author.mention}帳號建立完成,你目前有`{money}`元")
@@ -109,8 +110,8 @@ async def on_message(message):
         with open (f"money/{tmp[1]}.json",mode="r",encoding="utf-8") as filt:
             data = json.load(filt)
         await message.channel.send(f"{message.author.mention}id`{tmp[1]}`他現在有`{data['money']}`元")
-#give
-    if message.content.startswith(f'{PREFIX}give'):
+#set
+    if message.content.startswith(f'{PREFIX}set'):
         if message.author.id == int(op_id):
           await message.delete()
           tmp = message.content.split(" ",2)
@@ -119,7 +120,7 @@ async def on_message(message):
           崁入二 = tmp[1]
           #亨哥0126
           if len(tmp) == 1:
-            await message.channel.send(f"{PREFIX}give id 錢")
+            await message.channel.send(f"{PREFIX}set id 錢")
           else:
               filepath = f"money/{崁入一}.json"
               if os.path.isfile(filepath):
@@ -135,6 +136,41 @@ async def on_message(message):
                 await message.channel.send(f"找不到關於id:`{崁入一}`的帳號")
         else:
             await message.channel.send(f"{message.author.mention}你沒有權限")
+            
+            
+            #set
+    if message.content.startswith(f'{PREFIX}to'):
+      await message.delete()
+      tmp = message.content.split(" ",2)
+      id = tmp[1]
+      tmp = message.content.split(f"{id} ",2)
+      money = tmp[1]
+          #亨哥0126
+      if len(tmp) == 1:
+        await message.channel.send(f"{PREFIX}to id 錢")
+      else:
+          filepath = f"money/{id}.json"
+          if os.path.isfile(filepath):
+            with open (f"money/{message.author.id}.json",mode="r",encoding="utf-8") as filt:
+                data = json.load(filt)
+                if int(data["money"]) > int(money):
+                    TO = int(data["money"]) - int(money) 
+                    with open (f"money/{id}.json",mode="r",encoding="utf-8") as filt:
+                        data = json.load(filt)
+                    data['money'] = int(data["money"]) + int(money)
+                    with open (f"money/{id}.json",mode="w",encoding="utf-8") as filt:
+                        json.dump(data,filt)
+                    with open (f"money/{message.author.id}.json",mode="r",encoding="utf-8") as filt:
+                        data = json.load(filt)
+                    data["money"] = int(TO)
+                    with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
+                        json.dump(data,filt)
+                    await message.channel.send(f"轉帳成功!請通知 <@{id}> 查收")
+                else:
+                    await message.channel.send(f"{message.author.mention}你付不出這筆錢.w.")
+          else:
+            await message.channel.send(f"找不到關於id:`{id}`的帳號")
+
 
 #查別人
     if message.content.startswith(f'{PREFIX}money'):
