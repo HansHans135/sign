@@ -40,7 +40,7 @@ async def on_message(message):
         embed = discord.Embed(title="指令清單", description=f"前輟是{PREFIX}", color=0x04f108)
         embed.add_field(name=f"{PREFIX}help", value="操作手冊")
         embed.add_field(name=f"{PREFIX}new", value="創建帳號")
-        embed.add_field(name=f"{PREFIX}sign", value="簽到(冷卻時間的計算為每天08:00重製)")
+        embed.add_field(name=f"{PREFIX}sign", value="簽到")
         embed.add_field(name=f"{PREFIX}me", value="看你有多少錢")
         embed.add_field(name=f"{PREFIX}money id", value="看別人有多少錢")
         embed.add_field(name=f"{PREFIX}to id 錢", value="轉帳給別人")
@@ -138,7 +138,7 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention}你沒有權限")
             
             
-            #set
+#to
     if message.content.startswith(f'{PREFIX}to'):
       await message.delete()
       tmp = message.content.split(" ",2)
