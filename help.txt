@@ -9,7 +9,7 @@
 2.運行bot.py即可
 
 
-*可以用   "(前輟)give ID 錢"設定ID的錢,只有owner_id可以用
+*可以用   "(前輟)set ID 錢"設定ID的錢,只有owner_id可以用
 
 
 
