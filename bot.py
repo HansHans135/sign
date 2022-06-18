@@ -157,7 +157,7 @@ async def on_message(message):
                 data = json.load(filt)
                 if int(data["money"]) > int(money):
                     if int(money) > 0:
-                        if message.author.id == id:
+                        if int(message.author.id) == int(id):
                             await message.channel.send(f"{message.author.mention}你為何要轉給自己")
                         else:
                             TO = int(data["money"]) - int(money) 
