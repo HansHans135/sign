@@ -12,7 +12,8 @@
 > token就填token</br>
 > max每次簽到最高獲得數</br>
 > min每次簽到最低獲得數</br>
-> new創建帳號初始金額</br>
+> new創建帳號初始金額
+</br>
 2.執行`bot.py`</br></br></br>
 ---
 指令大全
