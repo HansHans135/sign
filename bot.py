@@ -158,6 +158,8 @@ async def on_message(message):
                 if int(data["money"]) > int(money):
                     if int(money) > 0:
                         if message.author.id == id:
+                            await message.channel.send(f"{message.author.mention}你為何要轉給自己")
+                        else:
                             TO = int(data["money"]) - int(money) 
                             with open (f"money/{id}.json",mode="r",encoding="utf-8") as filt:
                                 data = json.load(filt)
@@ -170,7 +172,6 @@ async def on_message(message):
                             with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
                                 json.dump(data,filt)
                             await message.channel.send(f"{message.author.mention}轉帳成功!請通知 <@{id}> 查收")
-                        else:
                               await message.channel.send(f"{message.author.mention}你為何要轉給自己")
                     else:
                         await message.channel.send(f"{message.author.mention}我不知道這個錢如何轉")
