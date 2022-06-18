@@ -156,18 +156,24 @@ async def on_message(message):
             with open (f"money/{message.author.id}.json",mode="r",encoding="utf-8") as filt:
                 data = json.load(filt)
                 if int(data["money"]) > int(money):
-                    TO = int(data["money"]) - int(money) 
-                    with open (f"money/{id}.json",mode="r",encoding="utf-8") as filt:
-                        data = json.load(filt)
-                    data['money'] = int(data["money"]) + int(money)
-                    with open (f"money/{id}.json",mode="w",encoding="utf-8") as filt:
-                        json.dump(data,filt)
-                    with open (f"money/{message.author.id}.json",mode="r",encoding="utf-8") as filt:
-                        data = json.load(filt)
-                    data["money"] = int(TO)
-                    with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
-                        json.dump(data,filt)
-                    await message.channel.send(f"轉帳成功!請通知 <@{id}> 查收")
+                    if int(money) > 0:
+                        if message.author.id == id:
+                            TO = int(data["money"]) - int(money) 
+                            with open (f"money/{id}.json",mode="r",encoding="utf-8") as filt:
+                                data = json.load(filt)
+                            data['money'] = int(data["money"]) + int(money)
+                            with open (f"money/{id}.json",mode="w",encoding="utf-8") as filt:
+                                json.dump(data,filt)
+                            with open (f"money/{message.author.id}.json",mode="r",encoding="utf-8") as filt:
+                                data = json.load(filt)
+                            data["money"] = int(TO)
+                            with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
+                                json.dump(data,filt)
+                            await message.channel.send(f"{message.author.mention}轉帳成功!請通知 <@{id}> 查收")
+                        else:
+                              await message.channel.send(f"{message.author.mention}你為何要轉給自己")
+                    else:
+                        await message.channel.send(f"{message.author.mention}我不知道這個錢如何轉")
                 else:
                     await message.channel.send(f"{message.author.mention}你付不出這筆錢.w.")
           else:
