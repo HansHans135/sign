@@ -172,7 +172,6 @@ async def on_message(message):
                             with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
                                 json.dump(data,filt)
                             await message.channel.send(f"{message.author.mention}轉帳成功!請通知 <@{id}> 查收")
-                              await message.channel.send(f"{message.author.mention}你為何要轉給自己")
                     else:
                         await message.channel.send(f"{message.author.mention}我不知道這個錢如何轉")
                 else:
