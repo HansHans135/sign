@@ -4,8 +4,9 @@ import discord
 import json
 import random
 import os
+import random, string
 
-
+      
 print("#####################################")
 print("##請著名來源,亨哥保有解釋權力##")
 print("#####################################")
@@ -120,7 +121,7 @@ async def on_message(message):
           崁入二 = tmp[1]
           #亨哥0126
           if len(tmp) == 1:
-            await message.channel.send(f"{PREFIX}set id 錢")
+            await message.channel.send(f"格式:{PREFIX}set id 錢")
           else:
               filepath = f"money/{崁入一}.json"
               if os.path.isfile(filepath):
@@ -186,5 +187,44 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention}id`{tmp[1]}`他現在有`{data['money']}`元")
         else:
             await message.channel.send("未找到這筆資料")
-
+            
+    if message.content.startswith(f'{PREFIX}code'):
+        if message.author.id == int(op_id):
+          await message.delete()
+          tmp = message.content.split(" ",2)
+          if len(tmp) == 1:
+            await message.channel.send(f"格式:{PREFIX}code 錢")
+          else:
+             CODE = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+             data = {"money":tmp[1]}
+             with open (f"code/{CODE}.json",mode="w",encoding="utf-8") as filt:
+                    json.dump(data,filt)
+             await message.channel.send(f"代碼為:||{CODE}||")
+        else:
+            await message.channel.send(f"{message.author.mention}你沒有權限")
+            
+            
+    if message.content.startswith(f'{PREFIX}get'):
+      await message.delete()
+      tmp = message.content.split(" ",2)
+      if len(tmp) == 1:
+        await message.channel.send("你要兌換甚麼啦？")
+      else:
+        filepath = f"code/{tmp[1]}.json"
+        if os.path.isfile(filepath):
+            with open (f"code/{tmp[1]}.json",mode="r",encoding="utf-8") as filt:
+                data = json.load(filt)
+            UP = data["money"]
+            with open (f"money/{message.author.id}.json",mode="r",encoding="utf-8") as filt:
+                data = json.load(filt)
+            data['money'] = int(data["money"]) + int(UP)
+            with open (f"money/{message.author.id}.json",mode="w",encoding="utf-8") as filt:
+                json.dump(data,filt)
+            fileTest = f"code/{tmp[1]}.json"
+            os.remove(fileTest)
+            await message.channel.send(f"{message.author.mention}成功使用`{tmp[1]}`兌換`{UP}`元")
+        else:
+            await message.channel.send("未找到這個代碼或是已被兌換")
+            
+            
 client.run(TOKEN)
