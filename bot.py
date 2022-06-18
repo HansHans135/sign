@@ -45,6 +45,7 @@ async def on_message(message):
         embed.add_field(name=f"{PREFIX}me", value="看你有多少錢")
         embed.add_field(name=f"{PREFIX}money id", value="看別人有多少錢")
         embed.add_field(name=f"{PREFIX}to id 錢", value="轉帳給別人")
+        embed.add_field(name=f"{PREFIX}get 代碼", value="兌換代碼")
         embed.add_field(name=f"{PREFIX}info", value="關於")
         await message.channel.send(content=None, embed=embed)
 #info
