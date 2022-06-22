@@ -1,9 +1,12 @@
-# 簽到程式
+# 簽到機器人
 若要修改程式,  請註明來源 https://github.com/HansHans135/sign/
 ---
 歡迎加入 https://hbot.fun  </br></br></br>
 
-
+---
+優點:
+---
+自動檢查更新</br>完善的指令</br>中文的提示...</br></br></br>
 
 如何設定?</br>
 1.於config.json填入資料</br>
