@@ -5,6 +5,7 @@ import json
 import random
 import os
 import random, string
+import requests
 
       
 print("#####################################")
@@ -21,7 +22,11 @@ TOKEN = data["token"]
 MAX = data["max"]
 MIN = data["min"]
 NEW = data["new"]
+V_NOW = "4.0"
 
+r=requests.get('https://raw.githubusercontent.com/HansHans135/sign/main/now.json')
+V_GET = r.json()
+V_NEW = V_GET["v"]
 
 
 client = discord.Client()
@@ -32,6 +37,17 @@ async def on_ready():
     status_w = discord.Status.online
     activity_w = discord.Activity(type=discord.ActivityType.watching, name=f"{PREFIX}help")
     await client.change_presence(status= status_w, activity=activity_w)
+    
+    print("版本檢查中...")
+    if V_NOW == V_NEW:
+        user = await client.fetch_user(op_id)
+        await user.send(f"恭喜你!!,目前`簽到功能`為最新版本")
+        print("版本檢查完成")
+    else:
+        user = await client.fetch_user(op_id)
+        await user.send(f"目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本")
+        print("版本檢查完成")
+        
 
 @client.event
 async def on_message(message):
