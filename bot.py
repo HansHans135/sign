@@ -63,6 +63,7 @@ async def on_message(message):
         embed.add_field(name=f"{PREFIX}to id 錢", value="轉帳給別人")
         embed.add_field(name=f"{PREFIX}get 代碼", value="兌換代碼")
         embed.add_field(name=f"{PREFIX}info", value="關於")
+        embed.add_field(name=f"{PREFIX}up", value="檢查版本")
         await message.channel.send(content=None, embed=embed)
 #info
     if message.content == f"{PREFIX}info":
@@ -249,6 +250,13 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention}成功使用`{tmp[1]}`兌換`{UP}`元")
         else:
             await message.channel.send("未找到這個代碼或是已被兌換")
+            
+    if message.content == f"{PREFIX}up":
+        if V_NOW == V_NEW:
+            await message.channel.send(f"{message.author.mention}目前`簽到功能`為最新版本\n目前:{V_NOW},最新:{V_NEW}")
+        else:
+            await message.channel.send(f"{message.author.mention}目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本\n目前:{V_NOW},最新:{V_NEW}")
+            
             
             
 client.run(TOKEN)
