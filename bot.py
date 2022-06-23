@@ -68,6 +68,7 @@ async def on_message(message):
     if message.content == f"{PREFIX}info":
         await message.delete()
         embed = discord.Embed(title="關於", description=f"前輟是{PREFIX}", color=0x04f108)
+        embed.add_field(name="目前版本", value=f"v {V_NOW}")
         embed.add_field(name="每次簽到最高", value=f"{MAX}$")
         embed.add_field(name="每次簽到最低", value=f"{MIN}$")
         embed.add_field(name="關於此機器人:", value="來自開源: https://github.com/HansHans135/sign")
