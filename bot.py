@@ -41,11 +41,11 @@ async def on_ready():
     print("版本檢查中...")
     if V_NOW == V_NEW:
         user = await client.fetch_user(op_id)
-        await user.send(f"恭喜你!!,目前`簽到功能`為最新版本")
+        await user.send(f"恭喜你!!,目前`簽到功能`為最新版本\n目前:{V_NOW},最新:{V_NEW}")
         print(f"版本檢查完成\n目前:{V_NOW},最新:{V_NEW}")
     else:
         user = await client.fetch_user(op_id)
-        await user.send(f"目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本")
+        await user.send(f"目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本\n目前:{V_NOW},最新:{V_NEW}")
         print(f"版本檢查完成\n目前:{V_NOW},最新:{V_NEW}")
         
 
