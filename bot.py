@@ -22,7 +22,7 @@ TOKEN = data["token"]
 MAX = data["max"]
 MIN = data["min"]
 NEW = data["new"]
-V_NOW = "4.2.1"
+V_NOW = "4.2.2"
 
 r=requests.get('https://raw.githubusercontent.com/HansHans135/sign/main/now.json')
 V_GET = r.json()
