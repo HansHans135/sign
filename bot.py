@@ -53,8 +53,10 @@ async def on_ready():
                     myfile = requests.get(url)
                     open('bot.py', 'wb').write(myfile.content)
                     print(f"下載完成!!重啟`bot.py`即可生效")
+                        i = 0
                 if a == "n":
                     print(f"已取消下載")
+                    i = 0
             else:
                 print("請輸入正確的回答")
             
