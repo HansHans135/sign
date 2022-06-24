@@ -22,7 +22,7 @@ TOKEN = data["token"]
 MAX = data["max"]
 MIN = data["min"]
 NEW = data["new"]
-V_NOW = "4.1.1"
+V_NOW = "4.2.1"
 
 r=requests.get('https://raw.githubusercontent.com/HansHans135/sign/main/now.json')
 V_GET = r.json()
@@ -40,12 +40,24 @@ async def on_ready():
     
     print("版本檢查中...")
     if V_NOW == V_NEW:
-        user = await client.fetch_user(op_id)
-        await user.send(f"恭喜你!!,目前`簽到功能`為最新版本\n目前:{V_NOW},最新:{V_NEW}")
-        print(f"版本檢查完成\n目前:{V_NOW},最新:{V_NEW}")
+        print(f"版本檢查完成\n目前為最新版本:{V_NEW}")
     else:
-        user = await client.fetch_user(op_id)
-        await user.send(f"目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本\n目前:{V_NOW},最新:{V_NEW}")
+        print(f"目前不是最新版本\n是否需要下載更新?[y/n]\n(目前:{V_NOW},最新:{V_NEW})")
+        i = 1
+        while i == 1:
+            a = input("你的選擇[y/n]:")
+            if a == "y" or a == "n":
+                if a == "y":
+                    print("下載中...")
+                    url = "https://raw.githubusercontent.com/HansHans135/sign/main/bot.py"
+                    myfile = requests.get(url)
+                    open('bot.py', 'wb').write(myfile.content)
+                    print(f"下載完成!!重啟`bot.py`即可生效")
+                if a == "n":
+                    print(f"已取消下載")
+            else:
+                print("請輸入正確的回答")
+            
         print(f"版本檢查完成\n目前:{V_NOW},最新:{V_NEW}")
         
 
@@ -63,7 +75,7 @@ async def on_message(message):
         embed.add_field(name=f"{PREFIX}to id 錢", value="轉帳給別人")
         embed.add_field(name=f"{PREFIX}get 代碼", value="兌換代碼")
         embed.add_field(name=f"{PREFIX}info", value="關於")
-        embed.add_field(name=f"{PREFIX}up", value="檢查版本(自動更新)")
+        embed.add_field(name=f"{PREFIX}up", value="檢查版本")
         await message.channel.send(content=None, embed=embed)
 #info
     if message.content == f"{PREFIX}info":
@@ -255,10 +267,10 @@ async def on_message(message):
         if V_NOW == V_NEW:
             await message.channel.send(f"{message.author.mention}目前`簽到功能`為最新版本\n目前:{V_NOW},最新:{V_NEW}")
         else:
-            await message.channel.send(f"{message.author.mention}目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本\n目前:{V_NOW},最新:{V_NEW}")
-            url = "https://raw.githubusercontent.com/HansHans135/sign/main/bot.py"
-            myfile = requests.get(url)
-            open('bot.py', ‘wb’).write(myfile.content)
-            
+            await message.channel.send(f"{message.author.mention}目前`簽到功能`不是最新版本\n請重啟機器人更新版本\n目前:{V_NOW},最新:{V_NEW}")
+
+
+
             
 client.run(TOKEN)
+
