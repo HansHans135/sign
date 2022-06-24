@@ -256,7 +256,9 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention}目前`簽到功能`為最新版本\n目前:{V_NOW},最新:{V_NEW}")
         else:
             await message.channel.send(f"{message.author.mention}目前`簽到功能`不是最新版本\n請前往 https://github.com/HansHans135/sign 更新版本\n目前:{V_NOW},最新:{V_NEW}")
-            
+            url = "https://raw.githubusercontent.com/HansHans135/sign/main/bot.py"
+            myfile = requests.get(url)
+            open('bot.py', ‘wb’).write(myfile.content)
             
             
 client.run(TOKEN)
