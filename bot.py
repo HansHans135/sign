@@ -63,7 +63,7 @@ async def on_message(message):
         embed.add_field(name=f"{PREFIX}to id 錢", value="轉帳給別人")
         embed.add_field(name=f"{PREFIX}get 代碼", value="兌換代碼")
         embed.add_field(name=f"{PREFIX}info", value="關於")
-        embed.add_field(name=f"{PREFIX}up", value="檢查版本")
+        embed.add_field(name=f"{PREFIX}up", value="檢查版本(自動更新)")
         await message.channel.send(content=None, embed=embed)
 #info
     if message.content == f"{PREFIX}info":
