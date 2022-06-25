@@ -22,7 +22,7 @@ TOKEN = data["token"]
 MAX = data["max"]
 MIN = data["min"]
 NEW = data["new"]
-V_NOW = "4.2.2"
+V_NOW = "4.2.3"
 
 r=requests.get('https://raw.githubusercontent.com/HansHans135/sign/main/now.json')
 V_GET = r.json()
@@ -53,7 +53,7 @@ async def on_ready():
                     myfile = requests.get(url)
                     open('bot.py', 'wb').write(myfile.content)
                     print(f"下載完成!!重啟`bot.py`即可生效")
-                        i = 0
+                    i = 0
                 if a == "n":
                     print(f"已取消下載")
                     i = 0
