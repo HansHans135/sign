@@ -22,7 +22,7 @@ TOKEN = data["token"]
 MAX = data["max"]
 MIN = data["min"]
 NEW = data["new"]
-V_NOW = "4.2.4"
+V_NOW = "4.3.4"
 
 r=requests.get('https://raw.githubusercontent.com/HansHans135/sign/main/now.json')
 V_GET = r.json()
@@ -265,6 +265,21 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention}成功使用`{tmp[1]}`兌換`{UP}`元")
         else:
             await message.channel.send("未找到這個代碼或是已被兌換")
+            
+            
+    if message.content.startswith(f'{PREFIX}dlt'):
+        if message.author.id == int(op_id):
+          await message.delete()
+          tmp = message.content.split(" ",2)
+          if len(tmp) == 1:
+            await message.channel.send(f"格式:{PREFIX}dlt 代碼")
+          else:
+            fileTest = f"code/{tmp[1]}.json"
+            os.remove(fileTest)
+            await message.channel.send(f"代碼`{tmp[1]}`已失效")
+        else:
+            await message.channel.send(f"{message.author.mention}你沒有權限")
+            
             
     if message.content == f"{PREFIX}up":
         if V_NOW == V_NEW:
