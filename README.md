@@ -13,9 +13,6 @@
 > owner_id填你的id</br>
 > prefix填你的前綴</br>
 > token就填token</br>
-> max每次簽到最高獲得數</br>
-> min每次簽到最低獲得數</br>
-> new創建帳號初始金額
 </br>
 
 2.執行 `bot.py`
