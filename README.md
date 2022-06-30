@@ -13,6 +13,9 @@
 > owner_id填你的id</br>
 > prefix填你的前綴</br>
 > token就填token</br>
+> max填入簽到最大金額</br>
+> min填入簽到最小金額</br>
+> new填入創建帳號初始金額
 </br>
 
 2.執行 `bot.py`
